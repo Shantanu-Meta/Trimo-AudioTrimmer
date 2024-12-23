@@ -9,52 +9,19 @@ const FileUpload = ({ onFileUpload }) => {
   };
 
   return (
-    <div
-      className="file-upload-container"
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '30vh',
-        backgroundColor: '#f0f0f0',
-        padding: '20px',
-        boxSizing: 'border-box',
-      }}
-    >
+    <div className="flex justify-center items-center h-30vh  p-5 box-border">
       <label
         htmlFor="file-upload"
-        className="file-upload-label"
-        style={{
-          display: 'inline-block',
-          padding: '12px 24px',
-          backgroundColor: '#4CAF50',
-          color: '#fff',
-          fontSize: '16px',
-          fontWeight: 'bold',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          transition: 'background-color 0.3s ease',
-          textAlign: 'center',
-          width: '100%',
-          maxWidth: '300px',
-        }}
+        className="inline-block py-3 px-6 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 shadow-orange-500/80 shadow-lg transform hover:scale-110 transition-all duration-300 text-center w-full max-w-xs"
       >
         <input
           id="file-upload"
           type="file"
           accept="audio/mp3"
           onChange={handleFileChange}
-          style={{
-            display: 'none',
-          }}
+          className="hidden"
         />
-        <span
-          className="file-upload-button"
-          style={{
-            display: 'inline-block',
-            width: '100%',
-          }}
-        >
+        <span className="inline-block w-full">
           Upload MP3
         </span>
       </label>

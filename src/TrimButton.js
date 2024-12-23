@@ -149,36 +149,18 @@ const TrimButton = ({ audioFile, trimRanges, onTrimmedAudio, duration }) => {
   }
 
   return (
-    <div style={styles.container}>
-      <button onClick={handleTrim} disabled={isTrimming} style={styles.button}>
+    <div className="flex justify-center items-center p-5 box-border">
+      <button
+        onClick={handleTrim}
+        disabled={isTrimming}
+        className={`py-3 px-6 bg-orange-500 text-white text-lg font-bold rounded-lg cursor-pointer hover:bg-orange-600 shadow-orange-500/80 shadow-lg transform hover:scale-110 transition-all duration-300 ease-in-out text-center w-full max-w-xs ${
+          isTrimming ? "bg-gray-500 cursor-not-allowed" : "hover:bg-orange-700"
+        }`}
+      >
         {isTrimming ? "Trimming..." : "Trim Audio"}
       </button>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "20px",
-    boxSizing: "border-box",
-  },
-  button: {
-    padding: "12px 24px",
-    backgroundColor: "#4CAF50",
-    color: "#fff",
-    fontSize: "16px",
-    fontWeight: "bold",
-    borderRadius: "5px",
-    cursor: "pointer",
-    border: "none",
-    transition: "background-color 0.3s ease",
-    textAlign: "center",
-    width: "100%",
-    maxWidth: "300px",
-  },
 };
 
 export default TrimButton;

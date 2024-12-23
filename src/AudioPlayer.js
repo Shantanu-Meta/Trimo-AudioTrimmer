@@ -13,10 +13,10 @@ const AudioPlayer = ({ audioData, trimRanges, onTrimRangesChange, duration, setD
       wavesurfer.current = WaveSurfer.create({
         container: waveformRef.current,
         waveColor: getRainbowColors(),
-        progressColor: "#211f1fc4",
+        progressColor: "#d6c5c5c9",
         height: 120,
         barWidth: 2,
-        cursorColor: "#FF0000",
+        cursorColor: "orange",
         responsive: true,
       });
 
@@ -98,77 +98,30 @@ const AudioPlayer = ({ audioData, trimRanges, onTrimRangesChange, duration, setD
   };
 
   return (
-    <div
-      className="audio-player-container"
-      style={{
-        fontFamily: "Arial, sans-serif",
-        margin: "20px",
-        maxWidth: "80vw",
-        marginLeft: "auto",
-        marginRight: "auto",
-      }}
-    >
+    <div className="audio-player-container font-sans md:w-[80vw] w-[100vw] mx-auto">
       <div
         ref={waveformRef}
-        className="waveform"
-        style={{
-          border: "1px solid #ccc",
-          borderRadius: "5px",
-          marginBottom: "20px",
-        }}
+        className="waveform border border-gray-300 rounded-lg mb-5"
       />
-      <div
-        className="controls"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          marginBottom: "10px",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-        }}
-      >
+      <div className="controls flex items-center mb-2 flex-wrap justify-between">
         <button
           onClick={togglePlayPause}
-          className="play-pause-button"
-          style={{
-            padding: "10px 20px",
-            marginRight: "20px",
-            backgroundColor: isPlaying ? "#FF4B4B" : "#4CAF50",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-            flex: "1 1 auto",
-            textAlign: "center",
-            maxWidth: "200px",
-          }}
+          className={`play-pause-button py-2 px-4 mr-5 text-white border-none rounded-lg cursor-pointer w-[3rem] md:w-[5rem] text-center  max-w-xs font-semibold ${
+            isPlaying ? "bg-orange-500" : "bg-green-500"
+          }`}
         >
           {isPlaying ? "Pause" : "Play"}
         </button>
-        <div
-          className="current-time"
-          style={{
-            fontSize: "16px",
-            textAlign: "center",
-          }}
-        >
+        <div className="current-time text-lg text-center">
           Current Time: {currentTime.toFixed(2)}s / {duration.toFixed(2)}s
         </div>
       </div>
 
-      <div className="timeline-container" style={{ marginTop: "20px" }}>
+      <div className="timeline-container mt-5">
         {trimRanges.map((timeLine, index) => (
           <div
             key={index}
-            className="timeline"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-              marginBottom: "10px",
-              flexWrap: "wrap",
-              justifyContent: "center",
-            }}
+            className="timeline flex items-center gap-2 mb-2 flex-wrap justify-center"
           >
             <input
               type="text"
@@ -179,14 +132,7 @@ const AudioPlayer = ({ audioData, trimRanges, onTrimRangesChange, duration, setD
                 updateTimeLine(index, "start", e.target.value, "min")
               }
               placeholder="Min"
-              className="timeline-input"
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                padding: "5px",
-                width: "60px",
-                textAlign: "center",
-              }}
+              className="timeline-input border border-gray-300 rounded-lg p-1 w-16 text-center text-black"
             />
             <input
               type="text"
@@ -197,14 +143,7 @@ const AudioPlayer = ({ audioData, trimRanges, onTrimRangesChange, duration, setD
                 updateTimeLine(index, "start", e.target.value, "sec")
               }
               placeholder="Sec"
-              className="timeline-input"
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                padding: "5px",
-                width: "60px",
-                textAlign: "center",
-              }}
+              className="timeline-input border border-gray-300 rounded-lg p-1 w-16 text-center text-black"
             />
             <input
               type="text"
@@ -215,14 +154,7 @@ const AudioPlayer = ({ audioData, trimRanges, onTrimRangesChange, duration, setD
                 updateTimeLine(index, "start", e.target.value, "ms")
               }
               placeholder="MS"
-              className="timeline-input"
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                padding: "5px",
-                width: "60px",
-                textAlign: "center",
-              }}
+              className="timeline-input border border-gray-300 rounded-lg p-1 w-16 text-center text-black"
             />
             <span>to</span>
             <input
@@ -234,14 +166,7 @@ const AudioPlayer = ({ audioData, trimRanges, onTrimRangesChange, duration, setD
                 updateTimeLine(index, "end", e.target.value, "min")
               }
               placeholder="Min"
-              className="timeline-input"
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                padding: "5px",
-                width: "60px",
-                textAlign: "center",
-              }}
+              className="timeline-input border border-gray-300 rounded-lg p-1 w-16 text-center text-black"
             />
             <input
               type="text"
@@ -252,14 +177,7 @@ const AudioPlayer = ({ audioData, trimRanges, onTrimRangesChange, duration, setD
                 updateTimeLine(index, "end", e.target.value, "sec")
               }
               placeholder="Sec"
-              className="timeline-input"
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                padding: "5px",
-                width: "60px",
-                textAlign: "center",
-              }}
+              className="timeline-input border border-gray-300 rounded-lg p-1 w-16 text-center text-black"
             />
             <input
               type="text"
@@ -270,41 +188,18 @@ const AudioPlayer = ({ audioData, trimRanges, onTrimRangesChange, duration, setD
                 updateTimeLine(index, "end", e.target.value, "ms")
               }
               placeholder="MS"
-              className="timeline-input"
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                padding: "5px",
-                width: "60px",
-                textAlign: "center",
-              }}
+              className="timeline-input border border-gray-300 rounded-lg p-1 w-16 text-center text-black"
             />
             <button
               onClick={addTimeLine}
-              className="add-timeline-button"
-              style={{
-                backgroundColor: "#4CAF50",
-                color: "#fff",
-                padding: "5px 10px",
-                borderRadius: "5px",
-                cursor: "pointer",
-                border: "none",
-              }}
+              className="add-timeline-button w-[2rem] md:w-[5rem] bg-orange-500 text-white p-1 rounded-lg cursor-pointer border-none"
             >
               +
             </button>
             {trimRanges.length > 1 && (
               <button
                 onClick={() => removeTimeLine(index)}
-                className="remove-timeline-button"
-                style={{
-                  backgroundColor: "#FF4B4B",
-                  color: "#fff",
-                  padding: "5px 10px",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                  border: "none",
-                }}
+                className="remove-timeline-button bg-red-500 text-white p-1 rounded-lg cursor-pointer border-none"
               >
                 Remove
               </button>
@@ -312,7 +207,6 @@ const AudioPlayer = ({ audioData, trimRanges, onTrimRangesChange, duration, setD
           </div>
         ))}
       </div>
-
     </div>
   );
 };
