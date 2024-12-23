@@ -58,14 +58,10 @@ const TrimButton = ({ audioFile, trimRanges, onTrimmedAudio, duration }) => {
           // Convert AudioBuffer to Float32Array
           const trimmedAudioArray = trimmedAudioBuffer.getChannelData(0);
 
-          console.log("Trimmed audio array:", trimmedAudioArray);
-          console.log("Sample rate:", trimmedAudioBuffer.sampleRate);
-
           // Create a new worker for encoding the trimmed audio
           const worker = new Worker();
           worker.onmessage = (event) => {
             const mp3Data = new Uint8Array(event.data);
-            console.log("Encoded MP3 data:", mp3Data);
 
             // Convert MP3 data to a Blob and create a URL for it
             const mp3Blob = new Blob([mp3Data], { type: "audio/mp3" });

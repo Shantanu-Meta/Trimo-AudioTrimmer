@@ -9,9 +9,6 @@ self.onmessage = function (event) {
     return;
   }
 
-  console.log('Received audioArray:', audioArray);
-  console.log('Received sampleRate:', sampleRate);
-
   // Encode trimmed audio to MP3 using LAME.js
   const mp3Data = encodeToMP3(audioArray, sampleRate);
 
