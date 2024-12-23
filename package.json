@@ -20,7 +20,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "install": "npm install --legacy-peer-deps"
+    "postinstall": "npm install --legacy-peer-deps"
   },
   "eslintConfig": {
     "extends": [
