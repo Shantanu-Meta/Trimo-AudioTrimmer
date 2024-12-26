@@ -1,3 +1,4 @@
+import { Upload } from 'lucide-react';
 import React from 'react';
 
 const FileUpload = ({ onFileUpload }) => {
@@ -21,8 +22,8 @@ const FileUpload = ({ onFileUpload }) => {
           onChange={handleFileChange}
           className="hidden"
         />
-        <span className="inline-block w-full">
-          Upload MP3
+        <span className="w-full flex items-center justify-center gap-2">
+          Upload MP3 <Upload size={24} className="inline-block" />
         </span>
       </label>
     </div>

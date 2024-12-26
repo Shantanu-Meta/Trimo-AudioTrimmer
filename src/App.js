@@ -48,7 +48,7 @@ function App() {
       <div className="absolute inset-0 bg-black bg-opacity-70"></div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-white text-center p-5">
+      <div className="relative z-10 flex flex-col items-center  min-h-[90vh] text-white text-center p-5">
         <h1 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-wide">
           Trimo
         </h1>
@@ -91,7 +91,7 @@ function App() {
       </div>
 
       {/* Footer */}
-      <footer className={`${audioFile ? "relative": "absolute"} bottom-0 z-10 bg-black bg-opacity-80 text-white py-4 mt-8 w-full`}>
+      <footer className={`relative bottom-0 z-10 bg-black bg-opacity-80 text-white py-4 mt-8 w-full`}>
         <div className="text-center text-sm md:text-base">
           Crafted with <span className="text-red-500">&hearts;</span> by 
           <a 

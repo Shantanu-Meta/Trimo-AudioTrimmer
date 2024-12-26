@@ -1,7 +1,14 @@
+import { AudioLines, MoveRight, Pause, PlayIcon, Scissors, Trash } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
 
-const AudioPlayer = ({ audioData, trimRanges, onTrimRangesChange, duration, setDuration }) => {
+const AudioPlayer = ({
+  audioData,
+  trimRanges,
+  onTrimRangesChange,
+  duration,
+  setDuration,
+}) => {
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
 
@@ -103,107 +110,119 @@ const AudioPlayer = ({ audioData, trimRanges, onTrimRangesChange, duration, setD
         ref={waveformRef}
         className="waveform border border-gray-300 rounded-lg mb-5"
       />
-      <div className="controls flex items-center mb-2 flex-wrap justify-between">
+      <div className="controls flex items-center mb-2 flex-wrap justify-between p-[1rem] md:p-0">
         <button
           onClick={togglePlayPause}
-          className={`play-pause-button py-2 px-4 mr-5 text-white border-none rounded-lg cursor-pointer w-[3rem] md:w-[5rem] text-center  max-w-xs font-semibold ${
+          className={`play-pause-button py-2 px-4 mr-5 text-white border-none rounded-lg cursor-pointer w-[5rem] md:w-[7rem] grid place-content-center  max-w-xs font-semibold ${
             isPlaying ? "bg-orange-500" : "bg-green-500"
           }`}
         >
-          {isPlaying ? "Pause" : "Play"}
+          {isPlaying ? <Pause/> : <PlayIcon/>}
         </button>
         <div className="current-time text-lg text-center">
-          Current Time: {currentTime.toFixed(2)}s / {duration.toFixed(2)}s
+          <AudioLines className="inline-block mr-1"/> : {currentTime.toFixed(2)}s / {duration.toFixed(2)}s
         </div>
       </div>
 
-      <div className="timeline-container mt-5">
+      <div className="timeline-container mt-6">
+            <p className="mb-5 text-[1rem]">Add multiple ranges to trim </p>
         {trimRanges.map((timeLine, index) => (
           <div
             key={index}
-            className="timeline flex items-center gap-2 mb-2 flex-wrap justify-center"
+            className="timeline flex flex-wrap items-center justify-center gap-5 mb-4"
           >
-            <input
-              type="text"
-              value={Math.floor(timeLine.start / 60)
-                .toString()
-                .padStart(2, "0")}
-              onChange={(e) =>
-                updateTimeLine(index, "start", e.target.value, "min")
-              }
-              placeholder="Min"
-              className="timeline-input border border-gray-300 rounded-lg p-1 w-16 text-center text-black"
-            />
-            <input
-              type="text"
-              value={Math.floor(timeLine.start % 60)
-                .toString()
-                .padStart(2, "0")}
-              onChange={(e) =>
-                updateTimeLine(index, "start", e.target.value, "sec")
-              }
-              placeholder="Sec"
-              className="timeline-input border border-gray-300 rounded-lg p-1 w-16 text-center text-black"
-            />
-            <input
-              type="text"
-              value={Math.floor((timeLine.start % 1) * 1000)
-                .toString()
-                .padStart(3, "0")}
-              onChange={(e) =>
-                updateTimeLine(index, "start", e.target.value, "ms")
-              }
-              placeholder="MS"
-              className="timeline-input border border-gray-300 rounded-lg p-1 w-16 text-center text-black"
-            />
-            <span>to</span>
-            <input
-              type="text"
-              value={Math.floor(timeLine.end / 60)
-                .toString()
-                .padStart(2, "0")}
-              onChange={(e) =>
-                updateTimeLine(index, "end", e.target.value, "min")
-              }
-              placeholder="Min"
-              className="timeline-input border border-gray-300 rounded-lg p-1 w-16 text-center text-black"
-            />
-            <input
-              type="text"
-              value={Math.floor(timeLine.end % 60)
-                .toString()
-                .padStart(2, "0")}
-              onChange={(e) =>
-                updateTimeLine(index, "end", e.target.value, "sec")
-              }
-              placeholder="Sec"
-              className="timeline-input border border-gray-300 rounded-lg p-1 w-16 text-center text-black"
-            />
-            <input
-              type="text"
-              value={Math.floor((timeLine.end % 1) * 1000)
-                .toString()
-                .padStart(3, "0")}
-              onChange={(e) =>
-                updateTimeLine(index, "end", e.target.value, "ms")
-              }
-              placeholder="MS"
-              className="timeline-input border border-gray-300 rounded-lg p-1 w-16 text-center text-black"
-            />
-            <button
-              onClick={addTimeLine}
-              className="add-timeline-button w-[2rem] md:w-[5rem] bg-orange-500 text-white p-1 rounded-lg cursor-pointer border-none"
-            >
-              +
-            </button>
-            {trimRanges.length > 1 && (
+            <div className="flex py-2 bg-[#49414194] rounded-lg shadow-md text-white">
+              <input
+                type="text"
+                value={Math.floor(timeLine.start / 60)
+                  .toString()
+                  .padStart(2, "0")}
+                onChange={(e) =>
+                  updateTimeLine(index, "start", e.target.value, "min")
+                }
+                placeholder="Min"
+                className="w-[1.5rem] md:w-16 text-center bg-transparent outline-none focus:ring-0"
+              />
+              :
+              <input
+                type="text"
+                value={Math.floor(timeLine.start % 60)
+                  .toString()
+                  .padStart(2, "0")}
+                onChange={(e) =>
+                  updateTimeLine(index, "start", e.target.value, "sec")
+                }
+                placeholder="Sec"
+                className="w-[1.5rem] md:w-16 text-center bg-transparent outline-none focus:ring-0"
+              />
+              :
+              <input
+                type="text"
+                value={Math.floor((timeLine.start % 1) * 1000)
+                  .toString()
+                  .padStart(3, "0")}
+                onChange={(e) =>
+                  updateTimeLine(index, "start", e.target.value, "ms")
+                }
+                placeholder="MS"
+                className="w-[2.5rem] md:w-16 text-center bg-transparent outline-none focus:ring-0"
+              />
+            </div>
+            <span><MoveRight className="inline-block w-4 h-4"/></span>
+            <div className="flex py-2 bg-[#49414194] rounded-lg shadow-md text-white">
+              <input
+                type="text"
+                value={Math.floor(timeLine.end / 60)
+                  .toString()
+                  .padStart(2, "0")}
+                onChange={(e) =>
+                  updateTimeLine(index, "end", e.target.value, "min")
+                }
+                placeholder="Min"
+                className="w-[1.5rem] md:w-16 text-center bg-transparent outline-none focus:ring-0"
+              />
+              :
+              <input
+                type="text"
+                value={Math.floor(timeLine.end % 60)
+                  .toString()
+                  .padStart(2, "0")}
+                onChange={(e) =>
+                  updateTimeLine(index, "end", e.target.value, "sec")
+                }
+                placeholder="Sec"
+                className="w-[1.5rem] md:w-16 text-center bg-transparent outline-none focus:ring-0"
+              />
+              :
+              <input
+                type="text"
+                value={Math.floor((timeLine.end % 1) * 1000)
+                  .toString()
+                  .padStart(3, "0")}
+                onChange={(e) =>
+                  updateTimeLine(index, "end", e.target.value, "ms")
+                }
+                placeholder="MS"
+                className="w-[2.5rem] md:w-16 text-center bg-transparent outline-none focus:ring-0"
+              />
+            </div>
+            <div className="flex items-center gap-2">
               <button
-                onClick={() => removeTimeLine(index)}
-                className="remove-timeline-button bg-red-500 text-white p-1 rounded-lg cursor-pointer border-none"
+                onClick={addTimeLine}
+                className="w-8 h-8 sm:w-16 sm:h-auto bg-orange-500 text-white rounded-full md:rounded-lg p-2 flex items-center justify-center"
               >
-                Remove
+                <Scissors className="h-4 w-4"/>
               </button>
-            )}
+              {trimRanges.length > 1 && (
+                <button
+                  onClick={() => removeTimeLine(index)}
+                  className="w-8 h-8 sm:w-16 sm:h-auto bg-red-500 text-white rounded-full md:rounded-lg p-2 flex items-center justify-center"
+                  title="Remove"
+                >
+                  <Trash className="h-4 w-4"/>
+                </button>
+              )}
+            </div>
           </div>
         ))}
       </div>
